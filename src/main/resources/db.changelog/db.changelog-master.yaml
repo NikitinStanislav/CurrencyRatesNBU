@@ -1,0 +1,56 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: itsStillMe
+      changes:
+        - createTable:
+            tableName: currency
+            columns:
+              - column:
+                  name: id
+                  type: bigserial
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: abbreviation
+                  type: varchar(3)
+              - column:
+                  name: code
+                  type: int
+              - column:
+                  name: name
+                  type: varchar
+        - addUniqueConstraint:
+            columnNames: code
+            tableName: currency
+
+  - changeSet:
+      id: 2
+      author: alsoMe
+      changes:
+        - createTable:
+            tableName: currency_rate
+            columns:
+              - column:
+                  name: id
+                  type: bigserial
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: rate
+                  type: double precision
+              - column:
+                  name: currency_id
+                  type: int
+              - column:
+                  name: date
+                  type: timestamp
+        - addUniqueConstraint:
+            columnNames: currency_id, date
+            tableName: currency_rate
+      manyToOne:
+        type:
+          targetEntity: Currency
+          joinColumn: currency_id

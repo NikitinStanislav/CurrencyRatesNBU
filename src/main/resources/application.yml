@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    username: postgres
+    password: postgres
+    url: jdbc:postgresql://localhost:5432/currencies
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    properties:
+      hibernate:
+        ddl-auto: none
+        temp:
+          use-jdbc_metadata_defaults: false
+logging:
+  level:
+    root: INFO
+    com.example.client.NBUClient: ${NBU_CLIENT_LOG_LEVEL:DEBUG}
+
+currencyRatesNBU.client.url: https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange
+
+
+
