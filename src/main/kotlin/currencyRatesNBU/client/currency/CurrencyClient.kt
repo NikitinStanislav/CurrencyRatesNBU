@@ -11,20 +11,21 @@ import org.springframework.web.util.UriComponentsBuilder
 
 
 @Component
-@Slf4j
-class CurrencyClient (private val restTemplate: RestTemplate,
-                      @Value("\${currencyRatesNBU.client.url}") private val url: String){
+class CurrencyClient(
+    private val restTemplate: RestTemplate,
+    @Value("\${currencyRatesNBU.client.url}") private val url: String
+) {
 
-    public fun getCurrencyRecord(abbreviation:String): CurrencyRecord?{
+    public fun getCurrencyRecord(abbreviation: String): CurrencyRecord? {
 
-        val fullUrl:String = UriComponentsBuilder.fromHttpUrl(url)
-                .queryParam("valcode", abbreviation)
-                .queryParam("json").toUriString();
+        val fullUrl: String = UriComponentsBuilder.fromHttpUrl(url)
+            .queryParam("valcode", abbreviation)
+            .queryParam("json").toUriString();
 
         //log.info("")
 
         val response: ResponseEntity<List<CurrencyRecord>> = restTemplate.exchange(fullUrl, HttpMethod.GET, null,
-                object: ParameterizedTypeReference<List<CurrencyRecord>>(){})  // object?
+            object : ParameterizedTypeReference<List<CurrencyRecord>>() {})  // object?
 
         return response.body?.stream()?.findAny()!!.orElse(CurrencyRecord())   //почему body хотя метод getBody
 
