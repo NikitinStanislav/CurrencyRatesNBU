@@ -1,6 +1,5 @@
 package currencyRatesNBU.client.currency
 
-import lombok.extern.slf4j.Slf4j
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.core.ParameterizedTypeReference
 import org.springframework.http.HttpMethod
@@ -11,7 +10,6 @@ import org.springframework.web.util.UriComponentsBuilder
 
 
 @Component
-@Slf4j
 class CurrencyClient (private val restTemplate: RestTemplate,
                       @Value("\${currencyRatesNBU.client.url}") private val url: String){
 
