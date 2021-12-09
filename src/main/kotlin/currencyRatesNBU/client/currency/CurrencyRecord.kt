@@ -1,8 +1,18 @@
 package currencyRatesNBU.client.currency
 
-import lombok.extern.slf4j.Slf4j
-import org.springframework.stereotype.Component
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.fasterxml.jackson.annotation.JsonProperty
 
-class CurrencyRecord {
-
+@JsonIgnoreProperties(ignoreUnknown = true)
+class CurrencyRecord(
+    @JsonProperty("cc")
+    private val abbreviation:String,
+    @JsonProperty("r030")
+     val code:Int,
+    @JsonProperty("txt")
+     val name:String
+){
+    override fun toString(): String {
+        return "CurrencyRecord(abbreviation='$abbreviation', code=$code, name='$name')"
+    }
 }

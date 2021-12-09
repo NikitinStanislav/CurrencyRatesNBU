@@ -14,7 +14,7 @@ class CurrencyClient(
     @Value("\${currencyRatesNBU.client.url}") private val url: String
 ) {
 
-    public fun getCurrencyRecord(abbreviation: String): CurrencyRecord? {
+    public fun getCurrencyRecord(abbreviation: String): CurrencyRecord {
 
         val fullUrl: String = UriComponentsBuilder.fromHttpUrl(url)
             .queryParam("valcode", abbreviation)
@@ -23,9 +23,9 @@ class CurrencyClient(
         //log.info("")
 
         val response: ResponseEntity<List<CurrencyRecord>> = restTemplate.exchange(fullUrl, HttpMethod.GET, null,
-            object : ParameterizedTypeReference<List<CurrencyRecord>>() {})  // object?
+            object : ParameterizedTypeReference<List<CurrencyRecord>>() {})  // object?      тут изменить
 
-        return response.body?.stream()?.findAny()!!.orElse(CurrencyRecord())   //почему body хотя метод getBody
+        return response.body?.stream()?.findAny()!!.orElse(CurrencyRecord())
 
     }
 }
