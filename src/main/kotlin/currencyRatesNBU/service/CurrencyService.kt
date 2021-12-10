@@ -7,7 +7,7 @@ import currencyRatesNBU.domain.CurrencyRate
 import currencyRatesNBU.dto.CurrencyDTO
 import currencyRatesNBU.dto.CurrencyRateDTO
 import currencyRatesNBU.repository.CurrencyRepository
-import org.modelmapper.ModelMapper
+import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.stereotype.Service
@@ -18,11 +18,13 @@ import java.time.ZoneOffset
 @Service
 class CurrencyService(
     private val client:CurrencyClient,
-    private val currencyRepository: CurrencyRepository,
+    private val currencyRepository: CurrencyRepository
 ) {
 
     @Autowired
     private lateinit var currencyRateService: CurrencyRateService
+
+    private val logger = KotlinLogging.logger{}
 
     fun findExactCurrencyByValcode(abbreviation:String?):List<CurrencyDTO>{
         if(abbreviation==null)    //тут разберись с null
@@ -43,10 +45,11 @@ class CurrencyService(
             val curRec:CurrencyRecord = client.getCurrencyRecord(abbreviation)
             try{
                 currencyRepository.save(Currency(abbreviation, curRec.code, curRec.name))
+                logger.info { "New currency $abbreviation saved" }
             } catch (ex: DataIntegrityViolationException){
-                    //log.error("Trying to add a duplicate currency: " + abbreviation)
+                    logger.error{"Trying to add a duplicate currency: $abbreviation"}
             }catch(ex: NullPointerException){
-                //log.error("Wrong name. Currency " + abbreviation + " not added")
+                logger.error{"Wrong name. Currency $abbreviation not added"}
             }
         }
     }
@@ -82,10 +85,6 @@ class CurrencyService(
         for(cur in currencies){
                 result.add(cur.toCurrencyDTO())
             }
-
-            //val currencyDTO:CurrencyDTO = modelMapper.map(cur, CurrencyDTO::class)  // хз че тут
-            //result.add(currencyDTO)
-
         return result
     }
 

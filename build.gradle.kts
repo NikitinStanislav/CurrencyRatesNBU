@@ -31,8 +31,12 @@ dependencies {
     implementation ("org.postgresql:postgresql:42.3.1")
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa
     implementation ("org.springframework.boot:spring-boot-starter-data-jpa:2.6.0")
-    // https://mvnrepository.com/artifact/org.modelmapper/modelmapper
-    implementation ("org.modelmapper:modelmapper:2.4.4")
+    // https://mvnrepository.com/artifact/io.github.microutils/kotlin-logging
+    implementation("io.github.microutils:kotlin-logging:2.1.15")
+    // https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
+    testImplementation("ch.qos.logback:logback-classic:1.2.7")
+
+
 }
 
 tasks.withType<KotlinCompile> {

@@ -1,10 +1,10 @@
 GET http://localhost:8080/currency
 ###
-GET http://localhost:8080/currency?valcode=USD
+GET http://localhost:8080/currency?valcode=GEL
 ###
-GET http://localhost:8080/currency?id=1
+GET http://localhost:8080/currency?id=2
 ###
-GET http://localhost:8080/currency/1?date=2018-07-18
+GET http://localhost:8080/currency/2?date=2018-04-02
 ###
 POST http://localhost:8080/currency
 Content-Type: application/json
@@ -13,7 +13,7 @@ Content-Type: application/json
   {"abbreviation":"EUR"},
   {"abbreviation":"GBP"}]
 ###
-DELETE http://localhost:8080/currency/2
+DELETE http://localhost:8080/currency/1
 ###
 
 ###
