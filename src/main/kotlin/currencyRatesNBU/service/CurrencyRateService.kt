@@ -5,6 +5,7 @@ import currencyRatesNBU.client.currencyRate.CurrencyRateRecord
 import currencyRatesNBU.domain.Currency
 import currencyRatesNBU.domain.CurrencyRate
 import currencyRatesNBU.repository.CurrencyRateRepository
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.stereotype.Service
 import java.time.LocalDate
@@ -15,8 +16,11 @@ import java.time.format.DateTimeFormatter
 class CurrencyRateService(
     val client: CurrencyRateClient,
     val currencyRateRepository: CurrencyRateRepository,
-    val currencyService: CurrencyService
 ) {
+
+    @Autowired
+    private lateinit var currencyService: CurrencyService
+
 
     fun saveCurrencyRate(currency: Currency?, date: LocalDate?){
         if(currency==null) return

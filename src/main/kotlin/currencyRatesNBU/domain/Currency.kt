@@ -8,16 +8,16 @@ class Currency(
     @Column(unique = true)
     val abbreviation:String="",
     //
-    private val code: Int=0,
+     val code: Int=0,
     //
-    private val name: String="",
+     val name: String="",
     //
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private var id: Long = 0,
+     var id: Long = 0,
     //
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "currency")
-    private var currencyRate: MutableList<CurrencyRate> = ArrayList()
+     var currencyRate: MutableList<CurrencyRate> = ArrayList()
     ){
 
 }

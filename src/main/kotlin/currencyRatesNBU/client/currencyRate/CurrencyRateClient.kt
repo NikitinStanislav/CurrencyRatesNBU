@@ -25,6 +25,6 @@ class CurrencyRateClient (
         val response: ResponseEntity<List<CurrencyRateRecord>> = restTemplate.exchange(fullUrl, HttpMethod.GET, null,
             object : ParameterizedTypeReference<List<CurrencyRateRecord>>() {})  // object?
 
-        return response.body?.stream()?.findAny()!!.orElse(CurrencyRateRecord())
+        return response.body?.stream()?.findAny()?.orElse(CurrencyRateRecord()) ?: CurrencyRateRecord()
     }
 }

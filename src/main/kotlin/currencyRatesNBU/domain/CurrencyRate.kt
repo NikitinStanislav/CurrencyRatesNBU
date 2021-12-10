@@ -4,15 +4,15 @@ import java.time.Instant
 import javax.persistence.*
 
 @Entity
-class CurrencyRate(
+data class CurrencyRate(
     //
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private var id: Long=0,
+     var id: Long=0,
     //
-    private val rate: Double=0.0,
+     val rate: Double=0.0,
     //
-    private val date: Instant = Instant.now(),
+     val date: Instant = Instant.now(),
     //
     @ManyToOne
     @JoinColumn(name = "currency_id")

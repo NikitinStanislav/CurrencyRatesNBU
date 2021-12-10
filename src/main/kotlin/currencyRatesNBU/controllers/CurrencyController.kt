@@ -2,15 +2,17 @@ package currencyRatesNBU.controllers
 
 import currencyRatesNBU.dto.CurrencyDTO
 import currencyRatesNBU.service.CurrencyService
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.format.annotation.DateTimeFormat
 import org.springframework.web.bind.annotation.*
 import java.time.LocalDate
 
 @RestController
 @RequestMapping("/currency")
-class CurrencyController(
-    private val currencyService:CurrencyService
-) {
+class CurrencyController(){
+
+    @Autowired
+    private lateinit var currencyService:CurrencyService
 
     @GetMapping
     fun getCurrencies(
